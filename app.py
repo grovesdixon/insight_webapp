@@ -5,6 +5,10 @@ import pandas as pd
 import numpy as np
 import pickle
 import streamlit as st
+#from sqlalchemy import create_engine
+#from sqlalchemy_utils import database_exists, create_database
+#import psycopg2 #(this broke streamlit)
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 
@@ -22,16 +26,6 @@ df  # <-- Draw the dataframe
 
 x = 10
 'x', x  # <-- Draw the string 'x' and then the value of x
-
-
-
-from sqlalchemy import create_engine
-from sqlalchemy_utils import database_exists, create_database
-import psycopg2
-import pandas as pd
-
-
-
 
 
 #load the model and example data
