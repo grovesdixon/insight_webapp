@@ -3,7 +3,6 @@ import os
 import os.path
 import pandas as pd
 import numpy as np
-import pickle
 import streamlit as st
 #from sqlalchemy import create_engine
 #from sqlalchemy_utils import database_exists, create_database
@@ -12,6 +11,8 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 scaler = MinMaxScaler()
 
+
+import joblib
 
 
 ####
@@ -30,7 +31,8 @@ x = 10
 
 #load the model and example data
 X_example = pd.read_csv('readmission_example_patients.csv', index_col=0)
-loaded_model = pickle.load(open('rf_model.sav', 'rb'))
+# loaded_model = pickle.load(open('rf_model.sav', 'rb'))
+loaded_model = joblib.load(open('rf_model.sav', 'rb'))
 probs_example = loaded_model.predict_proba(X_example)
 scores_example = probs_example[:, 1]
 patient_options = X_example.index.tolist()
