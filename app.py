@@ -7,7 +7,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import plotly.express as px
-
+from PIL import Image
 
 #print the title
 image = Image.open('data/logo.png')
