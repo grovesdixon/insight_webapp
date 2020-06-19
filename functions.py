@@ -12,7 +12,7 @@ from PIL import Image
 
 
 def plot_readmission_hist():
-	dat = joblib.load(open('/Users/grovesdixon/gitreps/Insight_fellowship_project/data/for_app/read_dat.joblib', 'rb'))
+	dat = joblib.load(open('data/read_dat.joblib', 'rb'))
 	fig = px.histogram(dat.loc[dat['day']<365,:], x="day", nbins=365,
                   color_discrete_sequence=['grey'])
 	fig.update_layout(title='Readmissions', xaxis_title="Days between discharge and readmission",
