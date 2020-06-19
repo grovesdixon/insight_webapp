@@ -8,23 +8,48 @@ image = Image.open('data/logo.png')
 st.image(image, format='PNG')
 
 
+
 #--------------- selecte app subset
  #get patient selection from user
-app_parts = ['Administrator overview', 'Discharge checker']
+app_parts = ['Administrator overview', 'Discharge advisor']
 current_part = st.sidebar.selectbox('Application:', app_parts)
 
 
 #--------------- ADMINISTRATIVE OVERVIEW
 if current_part == 'Administrator overview':
 	st.markdown('## Administrator Overview', unsafe_allow_html=False)
-	admin_options = ['Readmission times']
+	admin_options = ['Readmission times',
+	                 'Feature importances',
+	                 'Reduction goals']
 	current_option = st.sidebar.selectbox('Overview options:', admin_options)
 	if current_option == 'Readmission times':
 		plot_readmission_hist()
+	elif current_option == 'Feature importances':
+		plot_importance_bars()
+	elif current_option == 'Reduction goals':
+		st.write('reduction goals')
+		pr_dat, roc_dat, auc = load_performance()
+		select_stat = st.selectbox('Target performance statistic', ['precision', 'recall'])
+		if select_stat=='precision':
+			select_precision = st.slider('Select target precision', min_value=0.0, max_value=max(pr_dat['Precision']), value=0.14)
+			target_threshold, target_recall = plot_target_precision(select_precision)
+			st.write('The selected precision is {}.'.format(select_precision))
+			st.write('The resulting recall is {}.'.format(target_recall))
+		elif select_stat=='recall':
+			select_recall = st.slider('Select target recall', min_value=0.0, max_value=max(pr_dat['Recall']), value=0.14)
+			target_threshold, target_recall = plot_target_recall(select_recall)
+			st.write('The selected recall is {}.'.format(select_recall))
+			st.write('The resulting precision is {}.'.format(target_recall))
+
+
+
+
+
+
 
 
 #--------------- DISCHARGE ADVISOR
-elif current_part == 'Discharge checker':
+elif current_part == 'Discharge advisor':
 
 	#--------------- recomendation part
 	#load the model and example data and the model
@@ -56,7 +81,7 @@ elif current_part == 'Discharge checker':
 	             height=300,
 	             hover_data=["prediction", "percentage"],
 	             color_discrete_map={'readmission':'firebrick',
-	                                  'safe':'darkgrey'})
+	                                  'safe':'grey'})
 	fig.update_layout(
 	    title='Probability of readmission within 30 days of discharge',
 	    yaxis_title="",
