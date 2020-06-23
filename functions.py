@@ -23,13 +23,13 @@ def plot_readmission_hist():
 
 def plot_importance_bars():
 	dat = joblib.load(open('data/importances.joblib', 'rb'))
-	dat = dat.loc[0:20,:]
+	dat = dat.loc[0:49,:]
 	fig = go.Figure()
 	fig.add_trace(go.Bar(
 	    name='Control',
 	    x=dat['feature'], y=dat['importance'],
 	    marker_color='grey',
-	    error_y=dict(type='data', array=dat['std'], thickness=1)
+	    #error_y=dict(type='data', array=dat['std'], thickness=1)
 	))
 	fig.update_layout(plot_bgcolor='rgba(0,0,0,0)',
 					  yaxis_title='Feature importance')
@@ -53,7 +53,7 @@ def load_performance():
 	roc_dat = roc_dat.loc[tot>0,:]
 	return pr_dat, roc_dat, auc
 
-def plot_target_precision(select_precision=0.15):
+def plot_target_precision(select_precision=0.16):
 	#PLOT WITH SELECTED PRECISION
 	pr_dat['dist'] = abs(pr_dat['Precision']-select_precision)
 	pr_sub1 = pr_dat.loc[pr_dat['dist']==min(pr_dat['dist']),:]
@@ -124,7 +124,7 @@ def plot_target_precision(select_precision=0.15):
 
 
 
-def plot_target_recall(select_recall=0.15):
+def plot_target_recall(select_recall=0.16):
 	pr_dat['dist'] = abs(pr_dat['Recall']-select_recall)
 	pr_sub1 = pr_dat.loc[pr_dat['dist']==min(pr_dat['dist']),:]
 	pr_sub2 = pr_sub1.loc[pr_sub1['Precision']==max(pr_sub1['Precision']),]
