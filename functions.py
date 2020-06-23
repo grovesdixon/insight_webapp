@@ -191,4 +191,4 @@ def plot_target_recall(select_recall=0.16):
 	fig.update_xaxes(showline=True, linewidth=1.5, linecolor='black')
 	fig.update_yaxes(showline=True, linewidth=1.5, linecolor='black')
 	st.plotly_chart(fig, use_container_width=True)
-	return round(target_threshold,3), round(target_recall, 3)
+	return round(target_threshold,3), round(target_precision, 3)

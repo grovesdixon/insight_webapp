@@ -32,14 +32,14 @@ if current_part == 'Administrator overview':
 		select_stat = st.selectbox('Target performance statistic', ['precision', 'recall'])
 		if select_stat=='precision':
 			select_precision = st.slider('Select target precision', min_value=0.0, max_value=max(pr_dat['Precision']), value=0.16)
-			target_threshold, target_recall = plot_target_precision(select_precision)
+			target_threshold, recall_result = plot_target_precision(select_precision)
 			st.write('The selected precision is {}.'.format(select_precision))
-			st.write('The resulting recall is {}.'.format(target_recall))
+			st.write('The resulting recall is {}.'.format(recall_result))
 		elif select_stat=='recall':
 			select_recall = st.slider('Select target recall', min_value=0.0, max_value=max(pr_dat['Recall']), value=0.16)
-			target_threshold, target_recall = plot_target_recall(select_recall)
+			target_threshold, precision_result = plot_target_recall(select_recall)
 			st.write('The selected recall is {}.'.format(select_recall))
-			st.write('The resulting precision is {}.'.format(target_recall))
+			st.write('The resulting precision is {}.'.format(precision_result))
 
 
 #--------------- DISCHARGE ADVISOR
