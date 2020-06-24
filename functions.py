@@ -24,6 +24,8 @@ def plot_readmission_hist():
 def plot_importance_bars():
 	dat = joblib.load(open('data/importances.joblib', 'rb'))
 	dat = dat.loc[0:49,:]
+	# dat['feature'] = dat['feature'].str.replace('DNword_','Discharge Notes: ')
+	# dat['feature'] = dat['feature'].str.replace('drug_','Drug: ')
 	fig = go.Figure()
 	fig.add_trace(go.Bar(
 	    name='Control',

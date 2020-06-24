@@ -33,13 +33,17 @@ if current_part == 'Administrator overview':
 		if select_stat=='precision':
 			select_precision = st.slider('Select target precision', min_value=0.0, max_value=max(pr_dat['Precision']), value=0.16)
 			target_threshold, recall_result = plot_target_precision(select_precision)
-			st.write('The selected precision is {}.'.format(select_precision))
-			st.write('The resulting recall is {}.'.format(recall_result))
+			recall_pct = '{}%'.format(round(recall_result*100, 1))
+			warning_pct = '{}%'.format(round((select_precision)*100, 1))
+			st.write('Advisor will provide warning for {} of patients that will be readmitted in within 30 days'.format(recall_pct))
+			st.write('{} of warnings will be actual readmissions.'.format(warning_pct))
 		elif select_stat=='recall':
 			select_recall = st.slider('Select target recall', min_value=0.0, max_value=max(pr_dat['Recall']), value=0.16)
 			target_threshold, precision_result = plot_target_recall(select_recall)
-			st.write('The selected recall is {}.'.format(select_recall))
-			st.write('The resulting precision is {}.'.format(precision_result))
+			recall_pct = '{}%'.format(round(recall_result*100, 1))
+			warning_pct = '{}%'.format(round((select_precision)*100, 1))
+			st.write('Advisor will provide warning for {} of patients that will be readmitted in within 30 days'.format(recall_pct))
+			st.write('{} of warnings will be actual readmissions.'.format(warning_pct))
 
 
 #--------------- DISCHARGE ADVISOR
