@@ -40,8 +40,8 @@ if current_part == 'Administrator overview':
 		elif select_stat=='recall':
 			select_recall = st.slider('Select target recall', min_value=0.0, max_value=max(pr_dat['Recall']), value=0.16)
 			target_threshold, precision_result = plot_target_recall(select_recall)
-			recall_pct = '{}%'.format(round(recall_result*100, 1))
-			warning_pct = '{}%'.format(round((select_precision)*100, 1))
+			recall_pct = '{}%'.format(round(select_recall*100, 1))
+			warning_pct = '{}%'.format(round((precision_result)*100, 1))
 			st.write('Advisor will provide warning for {} of patients that will be readmitted in within 30 days'.format(recall_pct))
 			st.write('{} of warnings will be actual readmissions.'.format(warning_pct))
 
