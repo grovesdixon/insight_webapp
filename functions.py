@@ -34,8 +34,20 @@ def plot_importance_bars():
 	    #error_y=dict(type='data', array=dat['std'], thickness=1)
 	))
 	fig.update_layout(plot_bgcolor='rgba(0,0,0,0)',
-					  yaxis_title='Feature importance')
-	st.plotly_chart(fig, use_container_width=True)
+					  yaxis_title='Feature importance',
+					  autosize=False,
+					    width=600,
+					    height=700,
+					    margin=dict(
+					        l=50,
+					        r=50,
+					        b=300,
+					        t=100,
+					        pad=4
+					)
+				    )
+	st.plotly_chart(fig, use_container_width=False)
+	#st.write('(enter full screen mode to see feature labels)')
 
 
 def load_performance():
